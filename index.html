@@ -1,1 +1,424 @@
-<p>hello chandan </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Developer Portfolio</title>
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #0d0d0d;
+            color: #39ff14;
+            overflow-x: hidden;
+        }
+
+        /* Loading Animation */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0d0d0d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease-out;
+        }
+        #loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #39ff14;
+            border-top: 5px solid #ff00ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Hacker Glitch Animation */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(3px, 3px); }
+            80% { transform: translate(3px, -3px); }
+            100% { transform: translate(0); }
+        }
+
+        /* Pulsating Glow Animation */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 5px #39ff14, 0 0 10px #ff00ff; }
+            50% { box-shadow: 0 0 10px #39ff14, 0 0 20px #ff00ff; }
+            100% { box-shadow: 0 0 5px #39ff14, 0 0 10px #ff00ff; }
+        }
+
+        /* Typing Animation for Header */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* Header Section */
+        header {
+            background-color: #1a1a1a;
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 2px solid #39ff14;
+            box-shadow: 0 0 15px #39ff14;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #39ff14;
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #39ff14;
+            animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite;
+        }
+        header p {
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+            color: #ff00ff;
+        }
+        header nav a {
+            color: #ff00ff;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-size: 1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+        header nav a:hover {
+            color: #39ff14;
+            animation: glitch 0.3s linear;
+        }
+        header nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #39ff14;
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s;
+        }
+        header nav a:hover::after {
+            width: 100%;
+        }
+
+        /* About Section */
+        #about {
+            padding: 4rem 2rem;
+            background-color: #141414;
+            text-align: center;
+            border-bottom: 1px solid #39ff14;
+        }
+        #about h2 {
+            font-size: 2rem;
+            color: #39ff14;
+            text-shadow: 0 0 5px #39ff14;
+        }
+        #about p {
+            max-width: 800px;
+            margin: 1rem auto;
+            font-size: 1.1rem;
+            color: #ff00ff;
+        }
+
+        /* Skills Section */
+        #skills {
+            padding: 4rem 2rem;
+            background-color: #0d0d0d;
+        }
+        #skills h2 {
+            font-size: 2rem;
+            color: #39ff14;
+            text-align: center;
+            text-shadow: 0 0 5px #39ff14;
+        }
+        #skills div {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
+        #skills span {
+            background-color: #1a1a1a;
+            color: #39ff14;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            border: 1px solid #39ff14;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        #skills span:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #39ff14;
+            animation: pulse 1s infinite;
+        }
+
+        /* Experience Section */
+        #experience {
+            padding: 4rem 2rem;
+            background-color: #141414;
+            border-bottom: 1px solid #39ff14;
+        }
+        #experience h2 {
+            font-size: 2rem;
+            color: #39ff14;
+            text-align: center;
+            text-shadow: 0 0 5px #39ff14;
+        }
+        #experience div {
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+        #experience h3 {
+            font-size: 1.5rem;
+            color: #39ff14;
+        }
+        #experience p {
+            font-size: 1rem;
+            color: #ff00ff;
+        }
+        #experience ul {
+            list-style-type: square;
+            padding-left: 1.5rem;
+            font-size: 1rem;
+            color: #ff00ff;
+        }
+        #experience div:hover {
+            animation: glitch 0.3s linear;
+        }
+
+        /* Projects Section */
+        #projects {
+            padding: 4rem 2rem;
+            background-color: #0d0d0d;
+        }
+        #projects h2 {
+            font-size: 2rem;
+            color: #39ff14;
+            text-align: center;
+            text-shadow: 0 0 5px #39ff14;
+        }
+        #projects div {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
+        #projects div > div {
+            background-color: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #39ff14;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        #projects div > div:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px #39ff14;
+            animation: pulse 1s infinite;
+        }
+        #projects h3 {
+            font-size: 1.5rem;
+            color: #39ff14;
+        }
+        #projects p {
+            font-size: 1rem;
+            color: #ff00ff;
+        }
+        #projects a {
+            color: #ff00ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        #projects a:hover {
+            color: #39ff14;
+            animation: glitch 0.3s linear;
+        }
+
+        /* Contact Section */
+        #contact {
+            padding: 4rem 2rem;
+            background-color: #1a1a1a;
+            text-align: center;
+            border-top: 2px solid #39ff14;
+        }
+        #contact h2 {
+            font-size: 2rem;
+            color: #39ff14;
+            text-shadow: 0 0 5px #39ff14;
+        }
+        #contact p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 1rem auto;
+            color: #ff00ff;
+        }
+        #contact div a {
+            color: #ff00ff;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+        #contact div a:hover {
+            color: #39ff14;
+            animation: glitch 0.3s linear;
+            box-shadow: 0 0 10px #39ff14;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #141414;
+            color: #ff00ff;
+            text-align: center;
+            padding: 1rem 0;
+            font-size: 0.9rem;
+            border-top: 1px solid #39ff14;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div id="loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Header Section -->
+    <header>
+        <h1>John Doe</h1>
+        <p>Software Developer with 5 Years of Experience</p>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>
+            I am a passionate software developer with 5 years of experience building robust solutions for e-commerce, finance, and ERP systems. I specialize in creating scalable, efficient, and user-friendly applications, leveraging modern technologies to deliver impactful results.
+        </p>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>Skills</h2>
+        <div>
+            <span>JavaScript</span>
+            <span>Python</span>
+            <span>Java</span>
+            <span>React</span>
+            <span>Node.js</span>
+            <span>SQL</span>
+            <span>AWS</span>
+            <span>Docker</span>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2>Experience</h2>
+        <div>
+            <div>
+                <h3>Senior Software Developer</h3>
+                <p>TechCorp Solutions | Jan 2022 - Present</p>
+                <ul>
+                    <li>Developed scalable e-commerce platforms, increasing transaction speed by 30%.</li>
+                    <li>Led a team of 5 developers to implement a secure payment gateway for financial applications.</li>
+                    <li>Optimized ERP systems, reducing processing time by 25% through efficient database queries.</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Software Developer</h3>
+                <p>FinTech Innovations | Jun 2020 - Dec 2021</p>
+                <ul>
+                    <li>Built RESTful APIs for financial dashboards, improving data retrieval efficiency.</li>
+                    <li>Integrated third-party payment systems into e-commerce platforms.</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Junior Software Developer</h3>
+                <p>ERP Systems Ltd. | Aug 2019 - May 2020</p>
+                <ul>
+                    <li>Assisted in developing modules for inventory management in ERP systems.</li>
+                    <li>Contributed to database schema design for enterprise applications.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Projects</h2>
+        <div>
+            <div>
+                <h3>E-Commerce Platform</h3>
+                <p>Developed a full-stack e-commerce application with React and Node.js, featuring a secure checkout system and real-time inventory updates.</p>
+                <a href="#">View Project</a>
+            </div>
+            <div>
+                <h3>Financial Dashboard</h3>
+                <p>Built a real-time financial analytics dashboard using Python and AWS, enabling users to track investments and market trends.</p>
+                <a href="#">View Project</a>
+            </div>
+            <div>
+                <h3>ERP Inventory Module</h3>
+                <p>Designed and implemented an inventory management module for an ERP system, improving stock tracking efficiency.</p>
+                <a href="#">View Project</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p>
+            I'm available for exciting opportunities! Feel free to reach out via email or connect with me on LinkedIn.
+        </p>
+        <div>
+            <a href="mailto:john.doe@example.com">Email: john.doe@example.com</a>
+            <a href="https://linkedin.com/in/johndoe">LinkedIn</a>
+            <a href="https://github.com/johndoe">GitHub</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 John Doe. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Loading Animation -->
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
