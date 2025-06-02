@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Software Developer Portfolio</title>
+    <title>Chandan Sahu - Full Stack Developer</title>
     <style>
         /* Global Styles */
         body {
@@ -12,6 +12,11 @@
             background-color: #0d0d0d;
             color: #39ff14;
             overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.developer-mode {
+            background-color: #f5f5f5;
+            color: #333;
         }
 
         /* Loading Animation */
@@ -29,6 +34,9 @@
             opacity: 1;
             transition: opacity 0.5s ease-out;
         }
+        body.developer-mode #loader {
+            background: #f5f5f5;
+        }
         #loader.hidden {
             opacity: 0;
             pointer-events: none;
@@ -40,6 +48,10 @@
             border-top: 5px solid #ff00ff;
             border-radius: 50%;
             animation: spin 1s linear infinite;
+        }
+        body.developer-mode .loader-spinner {
+            border: 5px solid #007bff;
+            border-top: 5px solid #28a745;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -62,6 +74,11 @@
             50% { box-shadow: 0 0 10px #39ff14, 0 0 20px #ff00ff; }
             100% { box-shadow: 0 0 5px #39ff14, 0 0 10px #ff00ff; }
         }
+        body.developer-mode @keyframes pulse {
+            0% { box-shadow: 0 0 5px #007bff, 0 0 10px #28a745; }
+            50% { box-shadow: 0 0 10px #007bff, 0 0 20px #28a745; }
+            100% { box-shadow: 0 0 5px #007bff, 0 0 10px #28a745; }
+        }
 
         /* Typing Animation for Header */
         @keyframes typing {
@@ -72,6 +89,36 @@
             50% { border-color: transparent; }
         }
 
+        /* Theme Toggle Button */
+        #theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: #1a1a1a;
+            color: #39ff14;
+            border: 1px solid #39ff14;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        #theme-toggle:hover {
+            background-color: #39ff14;
+            color: #0d0d0d;
+            animation: glitch 0.3s linear;
+        }
+        body.developer-mode #theme-toggle {
+            background-color: #e0e0e0;
+            color: #007bff;
+            border: 1px solid #007bff;
+        }
+        body.developer-mode #theme-toggle:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
         /* Header Section */
         header {
             background-color: #1a1a1a;
@@ -79,6 +126,12 @@
             padding: 2rem 0;
             border-bottom: 2px solid #39ff14;
             box-shadow: 0 0 15px #39ff14;
+            position: relative;
+        }
+        body.developer-mode header {
+            background-color: #fff;
+            border-bottom: 2px solid #007bff;
+            box-shadow: 0 0 15px #007bff;
         }
         header h1 {
             margin: 0;
@@ -90,10 +143,17 @@
             border-right: 3px solid #39ff14;
             animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite;
         }
+        body.developer-mode header h1 {
+            color: #007bff;
+            border-right: 3px solid #007bff;
+        }
         header p {
             margin: 0.5rem 0;
             font-size: 1.2rem;
             color: #ff00ff;
+        }
+        body.developer-mode header p {
+            color: #28a745;
         }
         header nav a {
             color: #ff00ff;
@@ -103,9 +163,15 @@
             transition: color 0.3s;
             position: relative;
         }
+        body.developer-mode header nav a {
+            color: #007bff;
+        }
         header nav a:hover {
             color: #39ff14;
             animation: glitch 0.3s linear;
+        }
+        body.developer-mode header nav a:hover {
+            color: #28a745;
         }
         header nav a::after {
             content: '';
@@ -116,6 +182,9 @@
             left: 0;
             bottom: -5px;
             transition: width 0.3s;
+        }
+        body.developer-mode header nav a::after {
+            background-color: #28a745;
         }
         header nav a:hover::after {
             width: 100%;
@@ -128,10 +197,18 @@
             text-align: center;
             border-bottom: 1px solid #39ff14;
         }
+        body.developer-mode #about {
+            background-color: #fff;
+            border-bottom: 1px solid #007bff;
+        }
         #about h2 {
             font-size: 2rem;
             color: #39ff14;
             text-shadow: 0 0 5px #39ff14;
+        }
+        body.developer-mode #about h2 {
+            color: #007bff;
+            text-shadow: none;
         }
         #about p {
             max-width: 800px;
@@ -139,17 +216,27 @@
             font-size: 1.1rem;
             color: #ff00ff;
         }
+        body.developer-mode #about p {
+            color: #333;
+        }
 
         /* Skills Section */
         #skills {
             padding: 4rem 2rem;
             background-color: #0d0d0d;
         }
+        body.developer-mode #skills {
+            background-color: #f5f5f5;
+        }
         #skills h2 {
             font-size: 2rem;
             color: #39ff14;
             text-align: center;
             text-shadow: 0 0 5px #39ff14;
+        }
+        body.developer-mode #skills h2 {
+            color: #007bff;
+            text-shadow: none;
         }
         #skills div {
             display: flex;
@@ -167,11 +254,37 @@
             font-size: 1rem;
             border: 1px solid #39ff14;
             transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        body.developer-mode #skills span {
+            background-color: #fff;
+            color: #007bff;
+            border: 1px solid #007bff;
         }
         #skills span:hover {
             transform: scale(1.1);
             box-shadow: 0 0 15px #39ff14;
             animation: pulse 1s infinite;
+        }
+        body.developer-mode #skills span:hover {
+            box-shadow: 0 0 15px #007bff;
+        }
+        #skills svg {
+            width: 24px;
+            height: 24px;
+            fill: #39ff14;
+            transition: fill 0.3s;
+        }
+        body.developer-mode #skills svg {
+            fill: #007bff;
+        }
+        #skills span:hover svg {
+            fill: #ff00ff;
+        }
+        body.developer-mode #skills span:hover svg {
+            fill: #28a745;
         }
 
         /* Experience Section */
@@ -180,11 +293,19 @@
             background-color: #141414;
             border-bottom: 1px solid #39ff14;
         }
+        body.developer-mode #experience {
+            background-color: #fff;
+            border-bottom: 1px solid #007bff;
+        }
         #experience h2 {
             font-size: 2rem;
             color: #39ff14;
             text-align: center;
             text-shadow: 0 0 5px #39ff14;
+        }
+        body.developer-mode #experience h2 {
+            color: #007bff;
+            text-shadow: none;
         }
         #experience div {
             max-width: 800px;
@@ -194,15 +315,24 @@
             font-size: 1.5rem;
             color: #39ff14;
         }
+        body.developer-mode #experience h3 {
+            color: #007bff;
+        }
         #experience p {
             font-size: 1rem;
             color: #ff00ff;
+        }
+        body.developer-mode #experience p {
+            color: #333;
         }
         #experience ul {
             list-style-type: square;
             padding-left: 1.5rem;
             font-size: 1rem;
             color: #ff00ff;
+        }
+        body.developer-mode #experience ul {
+            color: #333;
         }
         #experience div:hover {
             animation: glitch 0.3s linear;
@@ -213,11 +343,18 @@
             padding: 4rem 2rem;
             background-color: #0d0d0d;
         }
+        body.developer-mode #projects {
+            background-color: #f5f5f5;
+        }
         #projects h2 {
             font-size: 2rem;
             color: #39ff14;
             text-align: center;
             text-shadow: 0 0 5px #39ff14;
+        }
+        body.developer-mode #projects h2 {
+            color: #007bff;
+            text-shadow: none;
         }
         #projects div {
             display: grid;
@@ -233,26 +370,80 @@
             border: 1px solid #39ff14;
             transition: transform 0.3s, box-shadow 0.3s;
         }
+        body.developer-mode #projects div > div {
+            background-color: #fff;
+            border: 1px solid #007bff;
+        }
         #projects div > div:hover {
             transform: translateY(-10px);
             box-shadow: 0 0 20px #39ff14;
             animation: pulse 1s infinite;
         }
+        body.developer-mode #projects div > div:hover {
+            box-shadow: 0 0 20px #007bff;
+        }
         #projects h3 {
             font-size: 1.5rem;
             color: #39ff14;
         }
+        body.developer-mode #projects h3 {
+            color: #007bff;
+        }
         #projects p {
             font-size: 1rem;
             color: #ff00ff;
+        }
+        body.developer-mode #projects p {
+            color: #333;
         }
         #projects a {
             color: #ff00ff;
             text-decoration: none;
             transition: color 0.3s;
         }
+        body.developer-mode #projects a {
+            color: #007bff;
+        }
         #projects a:hover {
             color: #39ff14;
+            animation: glitch 0.3s linear;
+        }
+        body.developer-mode #projects a:hover {
+            color: #28a745;
+        }
+
+        /* Awards Section */
+        #awards {
+            padding: 4rem 2rem;
+            background-color: #141414;
+            text-align: center;
+            border-bottom: 1px solid #39ff14;
+        }
+        body.developer-mode #awards {
+            background-color: #fff;
+            border-bottom: 1px solid #007bff;
+        }
+        #awards h2 {
+            font-size: 2rem;
+            color: #39ff14;
+            text-shadow: 0 0 5px #39ff14;
+        }
+        body.developer-mode #awards h2 {
+            color: #007bff;
+            text-shadow: none;
+        }
+        #awards ul {
+            list-style-type: square;
+            max-width: 800px;
+            margin: 2rem auto;
+            font-size: 1.1rem;
+            color: #ff00ff;
+            text-align: left;
+        }
+        body.developer-mode #awards ul {
+            color: #333;
+        }
+        #awards li:hover {
             animation: glitch 0.3s linear;
         }
 
@@ -263,16 +454,27 @@
             text-align: center;
             border-top: 2px solid #39ff14;
         }
+        body.developer-mode #contact {
+            background-color: #fff;
+            border-top: 2px solid #007bff;
+        }
         #contact h2 {
             font-size: 2rem;
             color: #39ff14;
             text-shadow: 0 0 5px #39ff14;
+        }
+        body.developer-mode #contact h2 {
+            color: #007bff;
+            text-shadow: none;
         }
         #contact p {
             font-size: 1.1rem;
             max-width: 600px;
             margin: 1rem auto;
             color: #ff00ff;
+        }
+        body.developer-mode #contact p {
+            color: #333;
         }
         #contact div a {
             color: #ff00ff;
@@ -281,10 +483,17 @@
             font-size: 1rem;
             transition: color 0.3s;
         }
+        body.developer-mode #contact div a {
+            color: #007bff;
+        }
         #contact div a:hover {
             color: #39ff14;
             animation: glitch 0.3s linear;
             box-shadow: 0 0 10px #39ff14;
+        }
+        body.developer-mode #contact div a:hover {
+            color: #28a745;
+            box-shadow: 0 0 10px #007bff;
         }
 
         /* Footer */
@@ -296,6 +505,11 @@
             font-size: 0.9rem;
             border-top: 1px solid #39ff14;
         }
+        body.developer-mode footer {
+            background-color: #fff;
+            color: #333;
+            border-top: 1px solid #007bff;
+        }
     </style>
 </head>
 <body>
@@ -306,13 +520,15 @@
 
     <!-- Header Section -->
     <header>
-        <h1>John Doe</h1>
-        <p>Software Developer with 5 Years of Experience</p>
+        <button id="theme-toggle">Switch to Developer Mode</button>
+        <h1>Chandan Sahu</h1>
+        <p>Full Stack Developer with 4+ Years of Experience</p>
         <nav>
             <a href="#about">About</a>
             <a href="#skills">Skills</a>
             <a href="#experience">Experience</a>
             <a href="#projects">Projects</a>
+            <a href="#awards">Awards</a>
             <a href="#contact">Contact</a>
         </nav>
     </header>
@@ -321,7 +537,7 @@
     <section id="about">
         <h2>About Me</h2>
         <p>
-            I am a passionate software developer with 5 years of experience building robust solutions for e-commerce, finance, and ERP systems. I specialize in creating scalable, efficient, and user-friendly applications, leveraging modern technologies to deliver impactful results.
+            I am a dedicated Full Stack Developer with over 4 years of experience in building robust and scalable web applications. Specializing in Angular, Node.js, and microservices architecture, I have a proven track record of delivering end-to-end solutions for analytics, e-commerce, and enterprise systems. My expertise includes REST API development, cloud integrations, and performance optimization, with a passion for creating seamless user experiences and secure, modular systems.
         </p>
     </section>
 
@@ -329,14 +545,60 @@
     <section id="skills">
         <h2>Skills</h2>
         <div>
-            <span>JavaScript</span>
-            <span>Python</span>
-            <span>Java</span>
-            <span>React</span>
-            <span>Node.js</span>
-            <span>SQL</span>
-            <span>AWS</span>
-            <span>Docker</span>
+            <span>
+                <svg viewBox="0 0 24 24">
+                    <path d="M7.5 5.6L5 7l1.4-2.5L5 3l2.5 1.4L9 3l-1.4 2.5L9 7zm12 9.8L22 14l-1.4 2.5L22 18l-2.5-1.4L18 18l1.4-2.5L18 14zm-2.9-14L12 3l-1.4-2.5L12 0l2.5 1.4L16 0l-1.4 2.5L16 3zm-12 14L0 18l1.4-2.5L0 14l2.5 1.4L4 14l-1.4 2.5L4 18zm0-12l-2.5-1.4L0 3l1.4 2.5L0 7l2.5-1.4L4 7l-1.4-2.5L4 3zm12 12l-2.5 1.4L12 18l1.4-2.5L12 14l2.5 1.4L16 14l-1.4 2.5L16 18z"/>
+                </svg>
+                JavaScript
+            </span>
+            <span>
+                <svg viewBox="0 0 24 24">
+                    <path d="M10.5 3l-1.5 1.5L12.5 8H3v2h9.5L9 13.5l1.5 1.5 5-5zM21 3v18H3V3h18zm-2 2H5v14h14V5z"/>
+                </svg>
+                Java
+            </span>
+            <span>
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm0-14c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 10c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/>
+                </svg>
+                Node.js
+            </span>
+            <span>
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm-2.3-5.3l-1.4-1.4L11 10.6l2.7 2.7-1.4 1.4-1.3-1.3-1.3 1.3zm2.3-6.4c-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"/>
+                </svg>
+                Angular
+            </span>
+            <span>
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 3h18v18H3zM12 5.5c-1.7 0-3 1.3-3 3 0 .8.3 1.5.8 2-.5.5-.8 1.2-.8 2 0 1.7 1.3 3 3 3s3-1.3 3-3c0-.8-.3-1.5-.8-2 .5-.5.8-1.2.8-2 0-1.7-1.3-3-3-3zm0 4c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm0 6c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z"/>
+                </svg>
+                Express.js
+            </span>
+            <span>
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 3h18v18H3V3zm16 16V5H5v14h14zm-2-2h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2zm-4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2zm-4 8H7v-2h2v2zm0-4H7v-2h2v2zm0-4H7V7h2v2z"/>
+                </svg>
+                MongoDB
+            </span>
+            <span>
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 3h18v18H3V3zm16 16V5H5v14h14zm-2-2h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2zm-4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2zm-4 8H7v-2h2v2zm0-4H7v-2h2v2zm0-4H7V7h2v2z"/>
+                </svg>
+                MySQL
+            </span>
+            <span>
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm-1-13h-2v10h2V7zm4 0h-2v10h2V7z"/>
+                </svg>
+                AWS S3
+            </span>
+            <span>
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 4h16v16H4V4zm14 14V6H6v12h12zm-8-2h4v-2h-4v2zm0-4h4v-2h-4v2zm-2 4h2v-6H8v6z"/>
+                </svg>
+                Docker
+            </span>
         </div>
     </section>
 
@@ -345,29 +607,41 @@
         <h2>Experience</h2>
         <div>
             <div>
-                <h3>Senior Software Developer</h3>
-                <p>TechCorp Solutions | Jan 2022 - Present</p>
+                <h3>Software Developer</h3>
+                <p>Marsh McLennan | November 2023 - Present | Pune, (M.H.)</p>
                 <ul>
-                    <li>Developed scalable e-commerce platforms, increasing transaction speed by 30%.</li>
-                    <li>Led a team of 5 developers to implement a secure payment gateway for financial applications.</li>
-                    <li>Optimized ERP systems, reducing processing time by 25% through efficient database queries.</li>
+                    <li>Designed and developed analytical views and components for an analytics application.</li>
+                    <li>Performed data manipulation for optimal analytical representation.</li>
+                    <li>Integrated AWS SQS and SNS into the application for enhanced functionality.</li>
                 </ul>
+                <p><strong>Tech Used:</strong> Angular, Node.js, Am Charts, Express.js, MongoDB</p>
+            </div>
+            <div>
+                <h3>Programmer Analyst</h3>
+                <p>Cognizant | July 2021 - October 2023 | Pune, (M.H.)</p>
+                <ul>
+                    <li>Developed REST APIs for seamless communication between microservices and components.</li>
+                    <li>Built responsive UI and integrated data using the Angular framework.</li>
+                    <li>Integrated external APIs (Azure Extraction Engine, Xtracta, Indigo) into internal systems.</li>
+                    <li>Implemented scheduled and bulk report generation features.</li>
+                    <li>Enhanced application security with API authentication and authorization mechanisms.</li>
+                    <li>Contributed to microservices architecture design, improving system modularity.</li>
+                    <li>Improved API performance by 40% through optimization techniques.</li>
+                    <li>Utilized AWS S3 and Azure Blob Storage for efficient data storage.</li>
+                </ul>
+                <p><strong>Tech Used:</strong> Angular, Node.js, NoSQL, RabbitMQ, Express.js</p>
             </div>
             <div>
                 <h3>Software Developer</h3>
-                <p>FinTech Innovations | Jun 2020 - Dec 2021</p>
+                <p>Riverhouse Technology | August 2020 - July 2021 | Bhilai, (C.G.)</p>
                 <ul>
-                    <li>Built RESTful APIs for financial dashboards, improving data retrieval efficiency.</li>
-                    <li>Integrated third-party payment systems into e-commerce platforms.</li>
+                    <li>Developed an e-commerce web application with responsive UI and REST APIs.</li>
+                    <li>Designed the system’s architectural framework for scalability.</li>
+                    <li>Integrated a payment gateway for secure transactions.</li>
+                    <li>Built a stock management system to streamline inventory processes.</li>
+                    <li>Optimized the application for SEO to improve visibility.</li>
                 </ul>
-            </div>
-            <div>
-                <h3>Junior Software Developer</h3>
-                <p>ERP Systems Ltd. | Aug 2019 - May 2020</p>
-                <ul>
-                    <li>Assisted in developing modules for inventory management in ERP systems.</li>
-                    <li>Contributed to database schema design for enterprise applications.</li>
-                </ul>
+                <p><strong>Tech Used:</strong> Angular, Node.js, MySQL, Socket.IO, Express.js</p>
             </div>
         </div>
     </section>
@@ -377,47 +651,82 @@
         <h2>Projects</h2>
         <div>
             <div>
-                <h3>E-Commerce Platform</h3>
-                <p>Developed a full-stack e-commerce application with React and Node.js, featuring a secure checkout system and real-time inventory updates.</p>
+                <h3>Analytics Application</h3>
+                <p>Developed an analytics platform with interactive UI and REST APIs, integrating AWS SQS and SNS for real-time data processing and visualization using Am Charts.</p>
                 <a href="#">View Project</a>
             </div>
             <div>
-                <h3>Financial Dashboard</h3>
-                <p>Built a real-time financial analytics dashboard using Python and AWS, enabling users to track investments and market trends.</p>
+                <h3>E-Commerce Web Application</h3>
+                <p>Built a full-stack e-commerce platform with Angular and Node.js, featuring a secure payment gateway, stock management system, and SEO optimization.</p>
                 <a href="#">View Project</a>
             </div>
             <div>
-                <h3>ERP Inventory Module</h3>
-                <p>Designed and implemented an inventory management module for an ERP system, improving stock tracking efficiency.</p>
+                <h3>Microservices-Based Reporting System</h3>
+                <p>Designed and implemented a microservices architecture for a reporting system, with scheduled and bulk report generation, integrated with Azure Extraction Engine and cloud storage.</p>
                 <a href="#">View Project</a>
             </div>
         </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards">
+        <h2>Awards</h2>
+        <ul>
+            <li>Qualified GATE (CS) Examination, 2020</li>
+            <li>Awarded "Always Striving Never Settling" Award at Cognizant, 2022</li>
+            <li>Awarded Top Performer Award at Cognizant, 2023</li>
+        </ul>
     </section>
 
     <!-- Contact Section -->
     <section id="contact">
         <h2>Contact Me</h2>
         <p>
-            I'm available for exciting opportunities! Feel free to reach out via email or connect with me on LinkedIn.
+            I'm excited to collaborate on innovative projects! Reach out via email or connect with me on LinkedIn, GitHub, LeetCode, HackerRank, or GeeksForGeeks.
         </p>
         <div>
-            <a href="mailto:john.doe@example.com">Email: john.doe@example.com</a>
-            <a href="https://linkedin.com/in/johndoe">LinkedIn</a>
-            <a href="https://github.com/johndoe">GitHub</a>
+            <a href="mailto:chandansahu7777777@gmail.com">Email: chandansahu7777777@gmail.com</a>
+            <a href="https://linkedin.com/in/chandan-sahu-78469218b">LinkedIn</a>
+            <a href="https://github.com/chandansahu777777">GitHub</a>
+            <a href="https://leetcode.com/chandansahu777777">LeetCode</a>
+            <a href="https://hackerrank.com/chandansahu77771">HackerRank</a>
+            <a href="https://geeksforgeeks.org/user/chandansahu7777777">GeeksForGeeks</a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>© 2025 John Doe. All rights reserved.</p>
+        <p>© 2025 Chandan Sahu. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript for Loading Animation -->
+    <!-- JavaScript for Loading Animation and Theme Toggle -->
     <script>
+        // Loading Animation
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('loader').classList.add('hidden');
             }, 2000);
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'developer') {
+            body.classList.add('developer-mode');
+            themeToggle.textContent = 'Switch to Hacker Mode';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('developer-mode');
+            if (body.classList.contains('developer-mode')) {
+                themeToggle.textContent = 'Switch to Hacker Mode';
+                localStorage.setItem('theme', 'developer');
+            } else {
+                themeToggle.textContent = 'Switch to Developer Mode';
+                localStorage.setItem('theme', 'hacker');
+            }
         });
     </script>
 </body>
