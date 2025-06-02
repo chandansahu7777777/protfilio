@@ -356,35 +356,43 @@
             color: #007bff;
             text-shadow: none;
         }
-        #projects div {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        #projects .projects-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 2rem;
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 2rem auto;
         }
-        #projects div > div {
+        #projects .project-card {
             background-color: #1a1a1a;
             padding: 1.5rem;
             border-radius: 10px;
             border: 1px solid #39ff14;
+            width: 100%;
+            max-width: 350px;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             transition: transform 0.3s, box-shadow 0.3s;
         }
-        body.developer-mode #projects div > div {
+        body.developer-mode #projects .project-card {
             background-color: #fff;
             border: 1px solid #007bff;
         }
-        #projects div > div:hover {
+        #projects .project-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 0 20px #39ff14;
             animation: pulse 1s infinite;
         }
-        body.developer-mode #projects div > div:hover {
+        body.developer-mode #projects .project-card:hover {
             box-shadow: 0 0 20px #007bff;
         }
         #projects h3 {
             font-size: 1.5rem;
             color: #39ff14;
+            margin-top: 0;
         }
         body.developer-mode #projects h3 {
             color: #007bff;
@@ -392,6 +400,7 @@
         #projects p {
             font-size: 1rem;
             color: #ff00ff;
+            flex-grow: 1;
         }
         body.developer-mode #projects p {
             color: #333;
@@ -400,6 +409,7 @@
             color: #ff00ff;
             text-decoration: none;
             transition: color 0.3s;
+            align-self: flex-start;
         }
         body.developer-mode #projects a {
             color: #007bff;
@@ -649,18 +659,18 @@
     <!-- Projects Section -->
     <section id="projects">
         <h2>Projects</h2>
-        <div>
-            <div>
+        <div class="projects-container">
+            <div class="project-card">
                 <h3>Analytics Application</h3>
                 <p>Developed an analytics platform with interactive UI and REST APIs, integrating AWS SQS and SNS for real-time data processing and visualization using Am Charts.</p>
                 <a href="#">View Project</a>
             </div>
-            <div>
+            <div class="project-card">
                 <h3>E-Commerce Web Application</h3>
                 <p>Built a full-stack e-commerce platform with Angular and Node.js, featuring a secure payment gateway, stock management system, and SEO optimization.</p>
                 <a href="#">View Project</a>
             </div>
-            <div>
+            <div class="project-card">
                 <h3>Microservices-Based Reporting System</h3>
                 <p>Designed and implemented a microservices architecture for a reporting system, with scheduled and bulk report generation, integrated with Azure Extraction Engine and cloud storage.</p>
                 <a href="#">View Project</a>
